@@ -97,8 +97,14 @@ public class ShardingTablesTest {
 
     @Test
     public void queryAllTest() {
-        List<TOrder> tOrders = tOrderMapper.selectList(new QueryWrapper<TOrder>());
-        System.out.println(tOrders);
+        while (true) {
+            List<TOrder> tOrders = tOrderMapper.selectList(new QueryWrapper<TOrder>());
+            System.out.println(tOrders);
+            if (tOrders.get(0).getOrderId().equals(4L)) {
+                break;
+            }
+        }
+        System.out.println("OK");
     }
 
     @Test
