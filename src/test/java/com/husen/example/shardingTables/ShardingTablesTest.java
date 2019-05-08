@@ -35,7 +35,7 @@ public class ShardingTablesTest {
      */
     @Test
     public void simpleTest() {
-        TOrder ok = new TOrder().setUserId(2).setStatus("OK");
+        TOrder ok = new TOrder().setUserId(1).setStatus("OK");
         int insert = tOrderMapper.insert(ok);
         System.out.println(ok.toString() + " row = " + insert);
     }
@@ -59,8 +59,9 @@ public class ShardingTablesTest {
         for (int i = 0; i < 10; i++) {
             Executors.newCachedThreadPool().execute(new Runnable() {
                 public void run() {
-                    int ok = tOrderMapper.insert(new TOrder().setUserId(1).setStatus("OK"));
-                    System.out.println(ok);
+                    TOrder tOrder = new TOrder().setUserId(1).setStatus("OK");
+                    int ok = tOrderMapper.insert(tOrder);
+                    System.out.println("ok = " + ok + " | tOrder = " + tOrder);
                     countDownLatch.countDown();
                 }
             });
