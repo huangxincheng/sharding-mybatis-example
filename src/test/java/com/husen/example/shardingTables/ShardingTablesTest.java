@@ -84,6 +84,7 @@ public class ShardingTablesTest {
             Executors.newCachedThreadPool().execute(new Runnable() {
                 public void run() {
                     tOrderBusinService.addOrder();
+                    countDownLatch.countDown();
                 }
             });
         }
@@ -100,19 +101,23 @@ public class ShardingTablesTest {
         while (true) {
             List<TOrder> tOrders = tOrderMapper.selectList(new QueryWrapper<TOrder>());
             System.out.println(tOrders);
-            if (tOrders.get(0).getOrderId().equals(4L)) {
-                break;
-            }
         }
-        System.out.println("OK");
     }
 
     @Test
     public void queryOneTest() {
-        TOrder tOrder = tOrderMapper.selectOne(new QueryWrapper<TOrder>()
-                .lambda()
-                .and(q -> q.eq(TOrder::getOrderId, 332930946938437640L)));
-        System.out.println(tOrder);
+        while (true) {
+            TOrder tOrder = tOrderMapper.selectOne(new QueryWrapper<TOrder>()
+                    .lambda()
+                    .and(q -> q.eq(TOrder::getOrderId, 0L))
+                    .and(q -> q.eq(TOrder::getUserId, 1L))
+            );
+            System.out.println(tOrder);
+            if (tOrder.getStatus().equals("M1S1")) {
+                break;
+            }
+        }
+
     }
 
     @Test
