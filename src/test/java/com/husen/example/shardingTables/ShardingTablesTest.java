@@ -35,7 +35,7 @@ public class ShardingTablesTest {
      */
     @Test
     public void simpleTest() {
-        TOrder ok = new TOrder().setUserId(1).setStatus("OK");
+        TOrder ok = new TOrder().setUserId(2).setStatus("OK");
         int insert = tOrderMapper.insert(ok);
         System.out.println(ok.toString() + " row = " + insert);
     }
