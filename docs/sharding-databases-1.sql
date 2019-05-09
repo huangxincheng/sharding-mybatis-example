@@ -17,6 +17,9 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+CREATE DATABASE `sharding-databases-1`;
+USE `sharding-databases-1`;
+
 -- ----------------------------
 -- Table structure for t_order
 -- ----------------------------

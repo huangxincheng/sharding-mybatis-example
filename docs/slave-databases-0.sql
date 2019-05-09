@@ -17,6 +17,9 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+CREATE DATABASE `slave-databases-0`;
+USE `slave-databases-0`;
+
 -- ----------------------------
 -- Table structure for t_order
 -- ----------------------------
