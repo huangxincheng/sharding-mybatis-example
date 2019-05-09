@@ -2,6 +2,8 @@ package com.husen.example.shardingTables;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.husen.example.shardingTables.entity.TOrder;
+import com.husen.example.shardingTables.entity.TOrderHistory;
+import com.husen.example.shardingTables.mapper.TOrderHistoryMapper;
 import com.husen.example.shardingTables.mapper.TOrderMapper;
 import com.husen.example.shardingTables.service.TOrderBusinService;
 import org.junit.Test;
@@ -29,6 +31,9 @@ public class ShardingTablesTest {
 
     @Autowired
     private TOrderBusinService tOrderBusinService;
+
+    @Autowired
+    private TOrderHistoryMapper tOrderHistoryMapper;
 
     /**
      * 简单测试分表
@@ -125,4 +130,17 @@ public class ShardingTablesTest {
         int i = tOrderMapper.deleteById(332930946938437640L);
         System.out.println("row  = " + i);
     }
+
+    @Test
+    public void addOrderHistoryTest() {
+        int ok = tOrderHistoryMapper.insert(new TOrderHistory().setOrderHistoryId(1L).setStatus("OK").setUserId(1));
+        System.out.println(ok);
+    }
+
+    @Test
+    public void queryOrderHistoryTest() {
+        TOrderHistory tOrderHistory = tOrderHistoryMapper.selectById(1L);
+        System.out.println(tOrderHistory);
+    }
+
 }
