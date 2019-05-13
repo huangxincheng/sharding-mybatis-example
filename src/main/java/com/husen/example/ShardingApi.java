@@ -1,5 +1,6 @@
 package com.husen.example;
 
+import com.husen.example.shardingTables.service.ErrorService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,5 +18,17 @@ public class ShardingApi {
     public String index() {
         String result = "hello sharding";
         return result;
+    }
+
+    @RequestMapping("/stack")
+    public String stack() {
+        new ErrorService().stackError();
+        return "stack";
+    }
+
+    @RequestMapping("/head")
+    public String head() {
+        new ErrorService().headError();
+        return "head";
     }
 }
